@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415033849) do
+ActiveRecord::Schema.define(:version => 20130416053520) do
 
   create_table "calendars", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20130415033849) do
     t.datetime "end"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "place"
   end
 
   add_index "event_schedules", ["event_id"], :name => "index_event_schedules_on_event_id"
