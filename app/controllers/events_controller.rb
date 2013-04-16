@@ -1,5 +1,19 @@
 class EventsController < ApplicationController
 
+  def create
+    @event = Event.new(params[:event])
+
+    respond_to do |format|
+      if @event.save
+        format.html { render :nothing => true }
+        format.json { render :json => @event, :status => :created, :location => @event }
+      else
+        format.html { render :nothing => true, :status => :unprocessable_entity }
+        format.json { render :json => @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def index
     if params[:date] and params[:calendar_ids]
       date = DateTime.parse(params[:date])
@@ -11,8 +25,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      format.xml { render :xml => @events.to_xml(:include => { :event_schedules => { :only => [:begin, :end] } }, :except => [:created_at, :updated_at]) }
-      format.json { render :json => @events.to_json(:include => { :event_schedules => { :only => [:begin, :end] } }, :except => [:created_at, :updated_at]) }
+      format.html { render :nothing => true }
+      format.xml { render :xml => @events.to_xml(:include => { :event_schedules => { :only => [:begin, :end, :place] } }, :except => [:created_at, :updated_at]) }
+      format.json { render :json => @events.to_json(:include => { :event_schedules => { :only => [:begin, :end, :place] } }, :except => [:created_at, :updated_at]) }
     end
   end
 
@@ -27,8 +42,9 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      format.xml { render :xml => @events.to_xml(:include => { :event_schedules => { :only => [:begin, :end] } }, :except => [:created_at, :updated_at]) }
-      format.json { render :json => @events.to_json(:include => { :event_schedules => { :only => [:begin, :end] } }, :except => [:created_at, :updated_at]) }
+      format.html { render :nothing => true }
+      format.xml { render :xml => @events.to_xml(:include => { :event_schedules => { :only => [:begin, :end, :place] } }, :except => [:created_at, :updated_at]) }
+      format.json { render :json => @events.to_json(:include => { :event_schedules => { :only => [:begin, :end, :place] } }, :except => [:created_at, :updated_at]) }
     end
   end
 

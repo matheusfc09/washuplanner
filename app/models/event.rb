@@ -3,4 +3,6 @@ class Event < ActiveRecord::Base
   has_many :event_schedules
 
   attr_accessible :description, :title
+
+  validates :title, :presence => true
 end

@@ -1,10 +1,10 @@
 WashuPlanner::Application.routes.draw do
 
-  resources :events, :only => [:index] do
+  resources :events, :only => [:index, :create] do
     get "today" => "events#today", :on => :collection
   end
 
-  resources :calendars, :only => [:index]
+  resources :calendars, :only => [:index, :create]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
